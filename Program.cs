@@ -13,7 +13,22 @@ namespace ConsoleApp1
 		{
 			try
 			{
-
+				Console.Write("input number 1:");
+				var a = float.Parse(Console.ReadLine());
+				Console.Write("input number 2:");
+				var b = float.Parse(Console.ReadLine());
+				Console.Write("input number 3:");
+				var c = float.Parse(Console.ReadLine());
+				if (QuadraticEquation(a, b, c) == null) Console.Write("The equation has no solution.");
+				else
+				{
+					if (QuadraticEquation(a, b, c).Count == 2) Console.WriteLine("The equation has two solution: ");
+					foreach (var item in QuadraticEquation(a, b, c))
+					{
+						if (QuadraticEquation(a, b, c).Count == 2) Console.WriteLine("{0}", item);
+						else Console.Write("The equation has one solution: {0}", item);
+					}
+				}
 			}
 			catch (Exception ex)
 			{
@@ -36,7 +51,6 @@ namespace ConsoleApp1
 					if (number % i == 0) return false;
 				}
 			}
-
 			return true;
 		}
 
@@ -143,6 +157,38 @@ namespace ConsoleApp1
 		static int LeastCommonMultiple(int firstNumber, int secondNumber)
 		{
 			return (firstNumber / GreatestCommonDivisor(firstNumber, secondNumber)) * secondNumber;
+		}
+
+		/// <summary>
+		/// Quadratic equation
+		/// </summary>
+		/// <returns>Results quadratic equation</returns>
+		static List<float> QuadraticEquation(float firstNumber, float secondNumber, float thirdNumber)
+		{
+			var listNumber = new List<float>();
+			if (firstNumber == 0)
+			{
+				if (secondNumber == 0) return null;
+				else
+				{
+					listNumber.Add((-thirdNumber / secondNumber));
+					return listNumber;
+				}
+			}
+
+			var delta = (float)Math.Sqrt(((secondNumber * secondNumber) - (4 * firstNumber * thirdNumber)));
+			if (delta > 0)
+			{
+				listNumber.Add((- secondNumber + delta) / (2 * firstNumber));
+				listNumber.Add((- secondNumber - delta) / (2 * firstNumber));
+				return listNumber;
+			}
+			else if (delta == 0)
+			{
+				listNumber.Add((-secondNumber) / (2 * firstNumber));
+				return listNumber;
+			}
+			else return null;
 		}
 	}
 }
