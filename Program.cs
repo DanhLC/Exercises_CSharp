@@ -65,7 +65,7 @@ namespace ConsoleApp1
 		/// Get list fibonacci
 		/// </summary>
 		/// <param name="number">Number</param>
-		/// <returns></returns>
+		/// <returns>List fibonacci number</returns>
 		static List<int> GetListFibonacci(int number)
 		{
 			var nextNumber = 0;
@@ -103,7 +103,7 @@ namespace ConsoleApp1
 		/// Is palindrome string
 		/// </summary>
 		/// <param name="inputString"></param>
-		/// <returns></returns>
+		/// <returns>Result check</returns>
 		static bool IsPalindrome(string inputString)
 		{
 			var first = inputString.Substring(0, inputString.Length / 2);
