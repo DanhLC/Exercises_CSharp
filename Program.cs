@@ -15,9 +15,9 @@ namespace ConsoleApp1
 			{
 
 			}
-			catch
+			catch (Exception ex)
 			{
-				Console.WriteLine("your input is not a integer number");
+				Console.WriteLine(ex.ToString());
 			}
 		}
 
@@ -97,6 +97,52 @@ namespace ConsoleApp1
 				calculate = calculate * i;
 			}
 			return calculate;
+		}
+
+		/// <summary>
+		/// Is palindrome string
+		/// </summary>
+		/// <param name="inputString"></param>
+		/// <returns></returns>
+		static bool IsPalindrome(string inputString)
+		{
+			var first = inputString.Substring(0, inputString.Length / 2);
+			var array = inputString.ToCharArray();
+
+			Array.Reverse(array);
+
+			var tempString = new string(array);
+			var second = tempString.Substring(0, tempString.Length / 2);
+
+			return first.Equals(second);
+		}
+
+		/// <summary>
+		/// Greatest common divisor
+		/// </summary>
+		/// <returns>Greatest common divisor result</returns>
+		static int GreatestCommonDivisor(int firstNumber, int secondNumber)
+		{
+			var remainder = 0;
+			while (secondNumber != 0)
+			{
+				remainder = firstNumber % secondNumber;
+				firstNumber = secondNumber;
+				secondNumber = remainder;
+			}
+
+			return firstNumber;
+		}
+
+		/// <summary>
+		/// Least common multiple
+		/// </summary>
+		/// <param name="firstNumber">First number</param>
+		/// <param name="secondNumber">Second number</param>
+		/// <returns>Least common multiple result</returns>
+		static int LeastCommonMultiple(int firstNumber, int secondNumber)
+		{
+			return (firstNumber / GreatestCommonDivisor(firstNumber, secondNumber)) * secondNumber;
 		}
 	}
 }
