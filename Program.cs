@@ -13,26 +13,129 @@ namespace ConsoleApp1
 		{
 			try
 			{
-				Console.Write("input number 1:");
-				var a = float.Parse(Console.ReadLine());
-				Console.Write("input number 2:");
-				var b = float.Parse(Console.ReadLine());
-				Console.Write("input number 3:");
-				var c = float.Parse(Console.ReadLine());
-				if (QuadraticEquation(a, b, c) == null) Console.Write("The equation has no solution.");
-				else
+				Console.Write("Here we have some function for you to choose. \n" +
+					"1. Check prime number \n" +
+					"2. Get list prime number \n" +
+					"3. Get list fibonacci \n" +
+					"4. Calculate factorial \n" +
+					"5. Check palindrome string \n" +
+					"6. Get greatest common divisor \n" +
+					"7. Get least common multiple \n" +
+					"8. Calculate a quadratic equation \n" +
+					"9. Exit (press Enter twice) \n" +
+					"Please choose a number to excute a function: ");
+				var numberFunction = int.Parse(Console.ReadLine());
+				switch (numberFunction)
 				{
-					if (QuadraticEquation(a, b, c).Count == 2) Console.WriteLine("The equation has two solution: ");
-					foreach (var item in QuadraticEquation(a, b, c))
-					{
-						if (QuadraticEquation(a, b, c).Count == 2) Console.WriteLine("{0}", item);
-						else Console.Write("The equation has one solution: {0}", item);
-					}
+					// Check prime number
+					case 1:
+						Console.Write("Please input a number to check: ");
+						var inputNumber = int.Parse(Console.ReadLine());
+
+						if (IsPrimeNumber(inputNumber)) Console.WriteLine("This is a prime number.\n");
+						else Console.WriteLine("This is not a prime number.\n");
+						Main(args);
+						break;
+
+					// Get list prime number
+					case 2:
+						Console.Write("Please input a number to get list prime (from 0 to your input number): ");
+						inputNumber = int.Parse(Console.ReadLine());
+						Console.WriteLine("Here is your list prime number (from 0 to {0}):", inputNumber);
+
+						foreach (var item in GetListPrimeNumber(inputNumber))
+						{
+							Console.Write("{0} \t", item);
+						}
+						Console.WriteLine("\n");
+						Main(args);
+						break;
+
+					// Get list fibonacci
+					case 3:
+						Console.Write("Please input a number to get list fibonacci number (from 0 to your input number): ");
+						inputNumber = int.Parse(Console.ReadLine());
+						Console.WriteLine("Here is your list fibonacci number (from 0 to {0}):", inputNumber);
+
+						foreach (var item in GetListFibonacci(inputNumber))
+						{
+							Console.Write("{0} \t", item);
+						}
+						Console.WriteLine("\n");
+						Main(args);
+						break;
+
+					// Calculate factorial
+					case 4:
+						Console.Write("Please input a number to calculate factorial: ");
+						inputNumber = int.Parse(Console.ReadLine());
+						Console.WriteLine("Here is your result: {0} \n", Factorial(inputNumber));
+						Main(args);
+						break;
+
+					// Check palindrome string
+					case 5:
+						Console.Write("Please input a string to check (palindrome): ");
+						var inputString = Console.ReadLine();
+						if (IsPalindrome(inputString)) Console.WriteLine("This is a palindrome string \n");
+						else Console.WriteLine("This is not a palindrome string \n");
+						Main(args);
+						break;
+
+					// Get greatest common divisor
+					case 6:
+						Console.Write("Please input 2 number to get greatest common divisor.\n" +
+							"First number: ");
+						var firstNumber = int.Parse(Console.ReadLine());
+						Console.Write("Second number: ");
+						var secondNumber = int.Parse(Console.ReadLine());
+						Console.WriteLine("The greatest common divisor is: {0} \n", GreatestCommonDivisor(firstNumber, secondNumber));
+						Main(args);
+						break;
+
+					// Get least common multiple
+					case 7:
+						Console.Write("Please input 2 number to get least common multiple.\n" +
+							"First number: ");
+						firstNumber = int.Parse(Console.ReadLine());
+						Console.Write("Second number: ");
+						secondNumber = int.Parse(Console.ReadLine());
+						Console.WriteLine("The least common multiple is: {0} \n", GreatestCommonDivisor(firstNumber, secondNumber));
+						Main(args);
+						break;
+
+					// Calculate a quadratic equation
+					case 8:
+						Console.Write("Please input 3 number to calculate a quadratic equation (ax^2 + bx + c = 0).\n" +
+							"a number: ");
+						var aNumber = float.Parse(Console.ReadLine());
+						Console.Write("b number: ");
+						var bNumber = float.Parse(Console.ReadLine());
+						Console.Write("c number: ");
+						var cNumber = float.Parse(Console.ReadLine());
+
+						if (QuadraticEquation(aNumber, bNumber, cNumber) == null) Console.Write("The equation has no solution. \n");
+						else
+						{
+							if (QuadraticEquation(aNumber, bNumber, cNumber).Count == 2) Console.WriteLine("The equation has two solution: ");
+							foreach (var item in QuadraticEquation(aNumber, bNumber, cNumber))
+							{
+								if (QuadraticEquation(aNumber, bNumber, cNumber).Count == 2) Console.WriteLine("x = {0}", item);
+								else Console.Write("The equation has one solution: x = {0}", item);
+							}
+						}
+						Main(args);
+						break;
+
+					case 9:
+					default:
+						break;
 				}
 			}
 			catch (Exception ex)
 			{
-				Console.WriteLine(ex.ToString());
+				Console.WriteLine("An error occur: {0}, please try again \n", ex.ToString());
+				Main(args);
 			}
 		}
 
